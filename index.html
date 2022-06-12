@@ -11,17 +11,83 @@
                 const randomNumber = Math.floor(Math.random()*3) + 1;
                 switch(randomNumber){
                     case 1:
-                        return "Rock";
+                        return "rock";
                         break;
                     case 2:
-                        return "Paper";
+                        return "paper";
                         break;
                     case 3:
-                        return "Scissors";
+                        return "scissors";
                         break;
                 }
             }
+            function playerSelection(){
+                return prompt("Please enter your guess").toLowerCase()
+            }
+         
 
+            function playRound(playerSelection, computerPlay){
+               if(playerSelection == 'rock'){
+                   switch(computerPlay){
+                        case "rock":
+                            return "It's a match"
+                            break;
+                        case "paper":
+                            return "You Lose! Paper beats rock"
+                            break;
+                        case "scissors":
+                            return "You Win! Rock beats scissors"
+                   }
+               }
+               else if(playerSelection == 'paper'){
+                switch(computerPlay){
+                        case "rock":
+                            return "You Win! Paper beats rock"
+                            break;
+                        case "paper":
+                            return "It's a match"
+                            break;
+                        case "scissors":
+                            return "You Lose! Scissors beats paper"
+                   }
+               }
+               else if(playerSelection == 'scissors'){
+                switch(computerPlay){
+                        case "rock":
+                            return "You Lose! Rock beats scissors"
+                            break;
+                        case "paper":
+                            return "You Win! Scissors beats paper"
+                            break;
+                        case "scissors":
+                            return "It's a match"
+                   }
+               }
+              else{
+                  return "Invalid input"
+              }
+              
+            }
+          
+            //console.log(playRound(playerSelection(), computerPlay()))
+            function game(playRound){
+                let playerCount = 0;
+                let computerCount = 0;
+                for(let i = 0; i < 5; i++){
+                    let result = playRound(playerSelection(), computerPlay())
+                    let winOrLose = result.slice(0,8)
+                    console.log(result)
+                    switch(winOrLose){
+                        case "You Win!":
+                            return playerCount += 1;
+                            break;
+                        case "You Lose":
+                            return computerCount +=1
+                    }                   
+                }
+                
+            }
+            game(playRound);
         </script>
     </body>
 </html>
