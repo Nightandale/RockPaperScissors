@@ -79,13 +79,22 @@
                     console.log(result)
                     switch(winOrLose){
                         case "You Win!":
-                            return playerCount += 1;
+                            playerCount += 1;
                             break;
                         case "You Lose":
-                            return computerCount +=1
+                            computerCount +=1
+                            break;
                     }                   
                 }
-                
+                if(playerCount > computerCount){
+                    return console.log(`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nYOU WON!`)
+                }
+                else if(playerCount < computerCount){
+                    return console.log(`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nYOU LOSE!`)
+                }
+                else{
+                    return console.log(`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nIT'S A MATCH!`)
+                }
             }
             game(playRound);
         </script>
