@@ -78,16 +78,17 @@
               else{
                   result.text = "Invalid input"
               }
-              return result;
+              return result.text;
             }
-          
+
+            console.log(playRound(playerSelection(), computerPlay()))
             
-            function game(playRound){
+            /* function game(playRound){
                 let playerCount = 0;
                 let computerCount = 0;
                 for(let i = 0; i < 5; i++){
                     let result = playRound(playerSelection(), computerPlay())
-                    //let winOrLose = result.slice(0,8)
+                   
                     console.log(result.text)
                     switch(result.win){
                         case 1:
@@ -108,7 +109,7 @@
                     return console.log(`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nIT'S A MATCH!`)
                 }
             }
-            game(playRound);
+            game(playRound); */
         </script>
     </body>
 </html>
