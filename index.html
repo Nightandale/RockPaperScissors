@@ -27,61 +27,73 @@
          
 
             function playRound(playerSelection, computerPlay){
+
+                const result = {text: "", win: null}
+
                if(playerSelection == 'rock'){
                    switch(computerPlay){
                         case "rock":
-                            return "It's a match"
+                            result.text = "It's a match"
                             break;
                         case "paper":
-                            return "You Lose! Paper beats rock"
+                            result.text = "You Lose! Paper beats rock"
+                            result.win = 0;
                             break;
                         case "scissors":
-                            return "You Win! Rock beats scissors"
+                            result.text =  "You Win! Rock beats scissors"
+                            result.win = 1;
+                            break;
                    }
                }
                else if(playerSelection == 'paper'){
                 switch(computerPlay){
                         case "rock":
-                            return "You Win! Paper beats rock"
+                            result.text =  "You Win! Rock beats scissors"
+                            result.win = 1;
                             break;
                         case "paper":
-                            return "It's a match"
+                            result.text = "It's a match"
                             break;
                         case "scissors":
-                            return "You Lose! Scissors beats paper"
+                            result.text = "You Lose! Paper beats rock"
+                            result.win = 0;
+                            break;
                    }
                }
                else if(playerSelection == 'scissors'){
                 switch(computerPlay){
                         case "rock":
-                            return "You Lose! Rock beats scissors"
+                            result.text = "You Lose! Paper beats rock"
+                            result.win = 0;
                             break;
                         case "paper":
-                            return "You Win! Scissors beats paper"
+                            result.text =  "You Win! Rock beats scissors"
+                            result.win = 1;
                             break;
                         case "scissors":
-                            return "It's a match"
+                            result.text = "It's a match"
+                            break;
                    }
                }
               else{
-                  return "Invalid input"
+                  result.text = "Invalid input"
               }
-              
+              return result;
             }
           
-            //console.log(playRound(playerSelection(), computerPlay()))
+            
             function game(playRound){
                 let playerCount = 0;
                 let computerCount = 0;
                 for(let i = 0; i < 5; i++){
                     let result = playRound(playerSelection(), computerPlay())
-                    let winOrLose = result.slice(0,8)
-                    console.log(result)
-                    switch(winOrLose){
-                        case "You Win!":
+                    //let winOrLose = result.slice(0,8)
+                    console.log(result.text)
+                    switch(result.win){
+                        case 1:
                             playerCount += 1;
                             break;
-                        case "You Lose":
+                        case 0:
                             computerCount +=1
                             break;
                     }                   
