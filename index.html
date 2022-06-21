@@ -3,9 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <title>Rock Paper Scissors</title>
+        <style>
+            body {
+                display: flex;
+                align-items: center;
+                flex-direction: column;      
+            }
+            #counter{
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            
+        </style>
     </head>
     <body>
-        <script>
+        <div id="counter"></div>
+        <div id="information"></div>   
+        <div id="container"></div>
+        
+        <script defer>
             
             function computerPlay(){
                 const randomNumber = Math.floor(Math.random()*3) + 1;
@@ -21,9 +38,7 @@
                         break;
                 }
             }
-            function playerSelection(){
-                return prompt("Please enter your guess").toLowerCase()
-            }
+           
          
 
             function playRound(playerSelection, computerPlay){
@@ -78,38 +93,77 @@
               else{
                   result.text = "Invalid input"
               }
-              return result.text;
+              return result;
+            }            
+
+            const counterInfo = document.querySelector("#counter");
+            const counter = document.createElement("div");
+            counter.textContent = "Counter: "
+            counterInfo.appendChild(counter)
+            const Result = document.createElement("div");
+            Result.textContent = "Result: "
+            counterInfo.appendChild(Result)
+
+            const information = document.querySelector('#information')
+            const resultView = document.createElement("div");
+            information.appendChild(resultView)
+            resultView.textContent = "Please choose one option:"
+            const container = document.querySelector('#container');
+
+            let classNames = ["rock", "paper", "scissors"];
+            for(let i = 0; i < 3; i++){
+                const button = document.createElement("button");
+                button.classList.add(classNames[i]);
+                button.textContent = classNames[i];
+                container.appendChild(button)
             }
 
-            console.log(playRound(playerSelection(), computerPlay()))
-            
-            /* function game(playRound){
-                let playerCount = 0;
-                let computerCount = 0;
-                for(let i = 0; i < 5; i++){
-                    let result = playRound(playerSelection(), computerPlay())
-                   
-                    console.log(result.text)
-                    switch(result.win){
+            const buttons = document.querySelectorAll('button');
+
+            buttons.forEach((button) => {
+                button.addEventListener('click', clicked)
+            })
+
+            function playerSelection(e){
+                return (e.target.className)
+            }
+
+
+            let count = 0
+            let playerCount = 0;
+            let computerCount = 0;  
+
+            function clicked(e){                
+                let oneGame = playRound(playerSelection(e), computerPlay())
+                
+                resultView.textContent = oneGame.text            
+                counter.textContent = `Counter ${count +=1}`
+                switch(oneGame.win){
                         case 1:
                             playerCount += 1;
                             break;
                         case 0:
                             computerCount +=1
                             break;
-                    }                   
-                }
-                if(playerCount > computerCount){
-                    return console.log(`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nYOU WON!`)
-                }
-                else if(playerCount < computerCount){
-                    return console.log(`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nYOU LOSE!`)
-                }
-                else{
-                    return console.log(`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nIT'S A MATCH!`)
-                }
+                    } 
+                if(count == 5){
+                    if(playerCount > computerCount){
+                    resultView.textContent = (`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nYOU WON!`)
+                    }
+                    else if(playerCount < computerCount){
+                    resultView.textContent = (`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nYOU LOSE!`)
+                    }
+                    else{
+                    resultView.textContent = (`Final count:\n- You: ${playerCount}\n- Computer: ${computerCount}\nIT'S A MATCH!`)
+                    }
+                count = 0;
+                playerCount = 0;
+                computerCount = 0;
+                
+                }             
             }
-            game(playRound); */
+            
+
         </script>
     </body>
 </html>
